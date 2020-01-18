@@ -1,4 +1,5 @@
 #!/bin/bash
+web_root="/web"
 
 if [[ !$ADMIN_PASSWORD ]]; then
     echo "No ADMIN_PASSWORD set, generating a random password and storing it here: /root/lucee-admin-password.txt"
