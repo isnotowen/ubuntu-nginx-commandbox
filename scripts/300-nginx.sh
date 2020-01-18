@@ -3,29 +3,20 @@ web_root="/web"
 
 echo "Installing nginx"
 apt-get install nginx
-echo "Adding lucee nginx configuration files"
-cp etc/nginx/conf.d/lucee-global.conf /etc/nginx/conf.d/lucee-global.conf
-cp etc/nginx/lucee.conf /etc/nginx/lucee.conf
-cp etc/nginx/lucee-proxy.conf /etc/nginx/lucee-proxy.conf
-
-echo "Configuring modcfml shared secret in nginx"
-shared_secret=`cat /opt/lucee/modcfml-shared-key.txt`
-sed -i "s/SHARED-KEY-HERE/$shared_secret/g" /etc/nginx/lucee-proxy.conf
+echo "Adding CommandBox nginx configuration files"
+cp etc/nginx/conf.d/nginx-custom-global.conf /etc/nginx/conf.d/nginx-custom-global.conf
+cp etc/nginx/commandbox.conf /etc/nginx/commandbox.conf
+cp etc/nginx/commandbox-proxy.conf /etc/nginx/commandbox-proxy.conf
 
 echo "Creating web root and default sites here: " $web_root
 mkdir $web_root
 mkdir $web_root/default
-mkdir $web_root/default/wwwroot
+mkdir $web_root/default/www
 mkdir $web_root/example.com
-mkdir $web_root/example.com/wwwroot
+mkdir $web_root/example.com/www
 
 echo "Creating a default index.html"
-echo "<!doctype html><html><body><h1>Hello</h1></body></html>" > $web_root/default/wwwroot/index.html
-
-
-
-#add tomcat8 to www-data group so it can read files
-usermod -aG www-data tomcat8
+echo "<!doctype html><html><body><h1>Hello</h1></body></html>" > $web_root/default/www/index.html
 
 #set the web directory permissions
 chown -R root:www-data $web_root

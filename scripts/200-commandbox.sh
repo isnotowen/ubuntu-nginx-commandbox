@@ -1,35 +1,18 @@
-#!/bin/bash
+#install commandbox
+echo "Installing CommandBox"
 
-jar_url="https://release.lucee.org/rest/update/provider/loader/$LUCEE_VERSION"
-if [[ $LUCEE_LIGHT ]];then
-    jar_url="https://release.lucee.org/rest/update/provider/light/$LUCEE_VERSION"
-fi
-jar_folder="lucee-$LUCEE_VERSION"
+curl -fsSl https://downloads.ortussolutions.com/debs/gpg | apt-key add -
+echo "deb https://downloads.ortussolutions.com/debs/noarch /" | tee -a /etc/apt/sources.list.d/commandbox.list
+apt-get update && apt-get install commandbox
 
-echo "Installing Lucee"
-echo "Downloading Lucee " $LUCEE_VERSION
-mkdir /opt/lucee
-mkdir /opt/lucee/config
-mkdir /opt/lucee/config/server
-mkdir /opt/lucee/config/web
-mkdir /opt/lucee/$jar_folder
-curl --location -o /opt/lucee/$jar_folder/lucee.jar $jar_url
+echo "Installing CommandBox CFCONFIG"
+box install commandbox-cfconfig
 
-if [ -f "/opt/lucee/$jar_folder/lucee.jar" ]; then
-  echo "Download Complete"
-else
-  echo "Download of Lucee Failed Exiting..."
-  exit 1
-fi
+echo "Installing CommandBox DOTENV"
+box install commandbox-dotenv
 
-if [[ $LUCEE_JAR_SHA256 ]];then
-    echo "Verifying SHA-256 checksum"
-    if [[ $(sha256sum "/opt/lucee/$jar_folder/lucee.jar") =~ "$LUCEE_JAR_SHA256" ]]; then
-        echo "Verified lucee.jar SHA-256: $LUCEE_JAR_SHA256"
-    else
-        echo "SHA-256 Checksum of lucee.jar verification failed"
-        exit 1
-    fi
-fi
-
-ln -s /opt/lucee/$jar_folder /opt/lucee/current
+echo "Copying CommandBox Startup Script"
+cp etc/init.d/commandbox-startup.sh /etc/init.d/commandbox-startup.sh
+chmod +x /etc/init.d/commandbox-startup.sh
+echo "Adding CommandBox Startup Script to boot sequence"
+update-rc.d /etc/init.d/commandbox-startup.sh defaults
