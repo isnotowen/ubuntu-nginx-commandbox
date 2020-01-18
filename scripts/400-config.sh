@@ -20,11 +20,11 @@ echo "Calling CommandBox Startup script"
 #box cfconfig set adminPasswordDefault=$ADMIN_PASSWORD to=/opt/lucee/config/server/lucee-server/ toFormat=luceeServer@5
 
 echo "Add Certbot PPA"
-apt-get install software-properties-common
+apt-get install software-properties-common -y
 add-apt-repository universe
 add-apt-repository ppa:certbot/certbot
 apt-get update
 
 echo "Install Certbot"
-apt-get install certbot python-certbot-nginx
+apt-get install certbot python-certbot-nginx -y
 certbot --nginx

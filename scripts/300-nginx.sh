@@ -2,7 +2,7 @@
 web_root="/web"
 
 echo "Installing nginx"
-apt-get install nginx
+apt-get install nginx -y
 echo "Adding CommandBox nginx configuration files"
 cp etc/nginx/conf.d/nginx-custom-global.conf /etc/nginx/conf.d/nginx-custom-global.conf
 cp etc/nginx/commandbox.conf /etc/nginx/commandbox.conf
