@@ -1,4 +1,13 @@
 #install commandbox
+echo "Installing Java"
+apt-get install default-jre -y
+apt-get install openjdk-11-jre-headless -y
+apt-get install openjdk-8-jre-headless -y
+apt-get install openjdk-9-jre-headless -y
+
+apt-get install default-jre -y
+java -version
+
 echo "Installing CommandBox"
 
 curl -fsSl https://downloads.ortussolutions.com/debs/gpg | apt-key add -
