@@ -15,7 +15,7 @@ cd $web_root/default/www/
 box server set name=default port=8080 host=127.0.1.1 openbrowser=false saveSettings=true
 
 echo "Calling CommandBox Startup script"
-./etc/init.d/commandbox-startup.sh
+sh /etc/init.d/commandbox-startup.sh
 
 #box cfconfig set adminPassword=$ADMIN_PASSWORD to=/opt/lucee/config/server/lucee-server/ toFormat=luceeServer@5
 #box cfconfig set adminPasswordDefault=$ADMIN_PASSWORD to=/opt/lucee/config/server/lucee-server/ toFormat=luceeServer@5
