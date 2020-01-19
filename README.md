@@ -1,4 +1,4 @@
-# Install script for bringing up and secure an nginx + commandbox server
+# Install script for bringing up and sequeuring an nginx + commandbox server
 
 After bringing a new server online download this repo as a zip to `/root`.
 
