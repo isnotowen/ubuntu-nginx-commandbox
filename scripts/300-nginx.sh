@@ -15,8 +15,8 @@ mkdir $web_root/default/www
 mkdir $web_root/example.com
 mkdir $web_root/example.com/www
 
-echo "Creating a default index.html"
-echo "<!doctype html><html><body><h1>Hello</h1></body></html>" > $web_root/default/www/index.html
+echo "Creating a default index.cfm"
+echo "<!doctype html><html><body><h1>Hello</h1>Current Date/Time: <em>#dateTimeFormat( now() )#</em></body></html>" > $web_root/default/www/index.cfm
 
 #set the web directory permissions
 chown -R root:www-data $web_root
