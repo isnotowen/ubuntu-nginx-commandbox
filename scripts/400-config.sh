@@ -12,7 +12,7 @@ fi
 
 echo "Configuring CommandBox for Default site"
 cd $web_root/default/www/
-box server start name=default port=8080 host=127.0.1.1 openbrowser=false saveSettings=true
+box server start port=8080 host=127.0.1.1 cfengine=lucee openbrowser=false saveSettings=true
 
 #box cfconfig set adminPassword=$ADMIN_PASSWORD to=/opt/lucee/config/server/lucee-server/ toFormat=luceeServer@5
 #box cfconfig set adminPasswordDefault=$ADMIN_PASSWORD to=/opt/lucee/config/server/lucee-server/ toFormat=luceeServer@5
