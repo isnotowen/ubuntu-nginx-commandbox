@@ -14,6 +14,7 @@ cp etc/init.d/commandbox-default /etc/init.d/commandbox-default
 chmod +x /etc/init.d/commandbox-default
 echo "Adding CommandBox Default as service"
 update-rc.d commandbox-default defaults
+systemctl enable commandbox-default
 
 echo "Add Certbot PPA"
 apt-get install software-properties-common -y
