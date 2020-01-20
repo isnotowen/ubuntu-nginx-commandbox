@@ -4,9 +4,9 @@ PATH="/usr/bin"
 
 case "$1" in
 	start) sudo box server start name=default openbrowser=false saveSettings=false --force;;
-	stop)  sudo box stop name=default;;
-	restart|force-reload) sudo box restart name=default;;
-	status) sudo box server status name=default;;
+	stop)  sudo box stop default;;
+	restart|force-reload) sudo box restart default;;
+	status) sudo box server status default;;
 	*) echo "Usage: $0 {start|stop|restart|force-reload}" >&2; exit 1 ;;
 esac
 
