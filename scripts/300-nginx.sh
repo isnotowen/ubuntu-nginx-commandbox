@@ -26,6 +26,7 @@ echo "Adding Default and Example Site to nginx"
 cp etc/nginx/sites-available/*.conf /etc/nginx/sites-available/
 echo "Removing nginx default site"
 rm /etc/nginx/sites-enabled/default
+rm /etc/nginx/sites-available/default
 echo "Adding our default site"
 ln -s /etc/nginx/sites-available/default.conf /etc/nginx/sites-enabled/default.conf
 
