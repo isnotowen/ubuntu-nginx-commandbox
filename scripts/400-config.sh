@@ -9,18 +9,11 @@ if [[ !$ADMIN_PASSWORD ]]; then
 	export ADMIN_PASSWORD=`cat /root/lucee-admin-password.txt`
 fi
 
-echo "Copying CommandBox Startup Script"
-cp etc/init.d/commandbox-startup.sh /etc/init.d/commandbox-startup.sh
-chmod +x /etc/init.d/commandbox-startup.sh
-echo "Adding CommandBox Startup Script to boot sequence"
-update-rc.d commandbox-startup.sh defaults
-
-echo "Configuring CommandBox for Default site"
-cd $WEB_ROOT/default/
-box server start port=8080 host=127.0.1.1 cfengine=lucee serverConfigFile=./server.json directory=www rewritesEnable=false openbrowser=false saveSettings=true
-
-#box cfconfig set adminPassword=$ADMIN_PASSWORD to=/opt/lucee/config/server/lucee-server/ toFormat=luceeServer@5
-#box cfconfig set adminPasswordDefault=$ADMIN_PASSWORD to=/opt/lucee/config/server/lucee-server/ toFormat=luceeServer@5
+echo "Copying CommandBox Service (Default)"
+cp etc/init.d/commandbox-default /etc/init.d/commandbox-default
+chmod +x /etc/init.d/commandbox-default
+echo "Adding CommandBox Default as service"
+update-rc.d commandbox-default defaults
 
 echo "Add Certbot PPA"
 apt-get install software-properties-common -y

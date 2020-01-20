@@ -7,21 +7,6 @@ cp etc/nginx/conf.d/nginx-custom-global.conf /etc/nginx/conf.d/nginx-custom-glob
 cp etc/nginx/commandbox.conf /etc/nginx/commandbox.conf
 cp etc/nginx/commandbox-proxy.conf /etc/nginx/commandbox-proxy.conf
 
-echo "Creating web root and default sites here: " $WEB_ROOT
-mkdir $WEB_ROOT
-mkdir $WEB_ROOT/default
-mkdir $WEB_ROOT/default/www
-mkdir $WEB_ROOT/example.com
-mkdir $WEB_ROOT/example.com/www
-
-echo "Creating a default index.cfm"
-echo "<!doctype html><html><body><cfoutput><h1>Hello</h1>Current Date/Time: <em>#dateTimeFormat( now() )#</em></cfoutput></body></html>" > $WEB_ROOT/default/www/index.cfm
-
-#set the web directory permissions
-chown -R root:www-data $WEB_ROOT
-chmod -R 750 $WEB_ROOT
-
-
 echo "Adding Default and Example Site to nginx"
 cp etc/nginx/sites-available/*.conf /etc/nginx/sites-available/
 echo "Removing nginx default site"

@@ -1,1 +1,0 @@
-box server start /web/default/server.json
