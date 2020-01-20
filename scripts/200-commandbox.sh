@@ -19,9 +19,3 @@ box install commandbox-cfconfig
 
 echo "Installing CommandBox DOTENV"
 box install commandbox-dotenv
-
-echo "Copying CommandBox Startup Script"
-cp etc/init.d/commandbox-startup.sh /etc/init.d/commandbox-startup.sh
-chmod +x /etc/init.d/commandbox-startup.sh
-echo "Adding CommandBox Startup Script to boot sequence"
-update-rc.d commandbox-startup.sh defaults

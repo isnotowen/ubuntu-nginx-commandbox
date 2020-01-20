@@ -16,6 +16,21 @@ function separator {
 chown -R root scripts/*.sh
 chmod u+x scripts/*.sh
 
+echo "Install requires some information..."
+read -p "Full path to web root (ex. /web): " -e -i '/web' WEB_ROOT
+while [ WEB_ROOT = "" ]; do
+	read -p "Provide full path to web root (ex. /web): " -e -i '/web' WEB_ROOT
+done
+read -p "Default server hostname: " -e -i $HOSTNAME HOST_NAME
+read -sp "Lucee Admin Password (Leave blank for randomly generated pw): " ADMIN_PASSWORD
+echo
+read -p "Lucee Admin white list IP: " WHITELIST_IP
+
+export WEB_ROOT
+export HOST_NAME
+export ADMIN_PASSWORD
+export WHITELIST_IP
+
 #update ubuntu software
 ./scripts/100-ubuntu-update.sh
 separator

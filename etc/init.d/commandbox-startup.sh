@@ -1,1 +1,1 @@
-box server start default
+box server start /web/default/server.json
