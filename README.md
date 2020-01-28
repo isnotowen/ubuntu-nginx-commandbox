@@ -8,6 +8,6 @@ To unzip, run: `unzip [filname uploaded].zip`
 
 Change to the directory: `cd ubuntu-nginx-commandbox`
 
-All install script to be executed with: `chmod +x install.sh`
+Allow install script to be executed with: `chmod +x install.sh`
 
 Then just run the install: `./install.sh`
