@@ -61,7 +61,7 @@ echo
 echo
 separator
 
-if [ $CONTINUE_INSTALL == "Y" ]; then
+if [ ${CONTINUE_INSTALL^^} == "Y" ]; then
 	#update ubuntu software
 	./scripts/100-ubuntu-update.sh
 	separator
