@@ -1,22 +1,22 @@
 #!/bin/bash
 
 function abort {
-        echo Aborted.
-        exit 1
+	echo Aborted.
+	exit 1
 }
 
 function separator {
-        echo " "
-        echo "------------------------------------------------"
-        echo " "
+	echo " "
+	echo "------------------------------------------------"
+	echo " "
 }
 
 
 function getWebRoot {
-        WEB_ROOT=$(whiptail --title "$whiptitle" --backtitle "$backtitle" --inputbox "What is the full path to your web root (ex. /web)" 10 80 "/web" 3>&1 1>&2 2>&3)
-        if [ ! $? = 0 ]; then
-	        confirmCancel
-                getWebRoot
+	WEB_ROOT=$(whiptail --title "$whiptitle" --backtitle "$backtitle" --inputbox "What is the full path to your web root (ex. /web)" 10 80 "/web" 3>&1 1>&2 2>&3)
+	if [ ! $? = 0 ]; then
+		confirmCancel
+		getWebRoot
 	elif [ "$WEB_ROOT" = "" ]; then
 		getWebRoot
 	fi
@@ -25,32 +25,32 @@ function getWebRoot {
 }
 
 function getHostName {
-        HOST_NAME=$(whiptail --title "$whiptitle" --backtitle "$backtitle" --inputbox "What is the default server hostname?" 10 80 "$HOSTNAME" 3>&1 1>&2 2>&3)
-        if [ ! $? = 0 ]; then
-                confirmCancel
-                getHostName
-        elif [ "$HOST_NAME" = "" ]; then
-                getHostName
+	HOST_NAME=$(whiptail --title "$whiptitle" --backtitle "$backtitle" --inputbox "What is the default server hostname?" 10 80 "$HOSTNAME" 3>&1 1>&2 2>&3)
+	if [ ! $? = 0 ]; then
+		confirmCancel
+		getHostName
+	elif [ "$HOST_NAME" = "" ]; then
+		getHostName
 	fi
 
 	export HOST_NAME
 }
 
 function getWhiteList {
-        WHITELIST_IP=$(whiptail --title "$whiptitle" --backtitle "$backtitle" --inputbox "Enter an IP address you'd like to whitelist for Lucee admin (optional)" 10 80 "127.0.0.1" 3>&1 1>&2 2>&3)
-        if [ ! $? = 0 ]; then
-                confirmCancel
-                getWhiteLlist
+	WHITELIST_IP=$(whiptail --title "$whiptitle" --backtitle "$backtitle" --inputbox "Enter an IP address you'd like to whitelist for Lucee admin (optional)" 10 80 "127.0.0.1" 3>&1 1>&2 2>&3)
+	if [ ! $? = 0 ]; then
+		confirmCancel
+		getWhiteLlist
 	fi
 
 	export WHITELIST_IP
 }
 
 function getAdminPassword {
-        ADMIN_PASSWORD=$(whiptail --title "$whiptitle" --backtitle "$backtitle" --passwordbox "Lucee Admin Password (Leave blank for a randomly generated password)" 10 80 3>&1 1>&2 2>&3)
-        if [ ! $? = 0 ]; then
-                confirmCancel
-                getAdminPassword
+	ADMIN_PASSWORD=$(whiptail --title "$whiptitle" --backtitle "$backtitle" --passwordbox "Lucee Admin Password (Leave blank for a randomly generated password)" 10 80 3>&1 1>&2 2>&3)
+	if [ ! $? = 0 ]; then
+		confirmCancel
+		getAdminPassword
 	fi
 
 	if [ "$ADMIN_PASSWORD" = "" ]; then
@@ -63,9 +63,21 @@ function getAdminPassword {
 	export ADMIN_PASSWORD
 }
 
+function getCFEngine {
+	CF_ENGINE=$(whiptail --title "$whiptitle" --backtitle "$backtitle" --inputbox "What CF Engine should be used? (ex. Lucee or Adobe)" 10 80 "Lucee" 3>&1 1>&2 2>&3)
+	if [ ! $? = 0 ]; then
+		confirmCancel
+		getCFEngine
+	elif [ "$CF_ENGINE" = "" ]; then
+		getCFEngine
+	fi
+
+	export CF_ENGINE
+}
+
 
 function getRewritesEnabled {
-        if( whiptail --title "$whiptitle" --backtitle "$backtitle" --yesno "Do you want to enable commandbox URL rewrites?" 10 40 )
+	if( whiptail --title "$whiptitle" --backtitle "$backtitle" --yesno "Do you want to enable commandbox URL rewrites?" 10 40 )
 	then
 		REWRITES_ENABLED="true"
 	else
@@ -78,19 +90,19 @@ function getRewritesEnabled {
 
 
 function getCertBotSetup {
-        if( whiptail --title "$whiptitle" --backtitle "$backtitle" --yesno "Do you want to setup a certificate with certbot?" 10 40 )
-        then
-                CERTBOT="Yes"
-        else
-                CERTBOT="No"
-        fi
+	if( whiptail --title "$whiptitle" --backtitle "$backtitle" --yesno "Do you want to setup a certificate with certbot?" 10 40 )
+	then
+		CERTBOT="Yes"
+	else
+		CERTBOT="No"
+	fi
 
-        export CERTBOT
+	export CERTBOT
 }
 
 
 function confirmInputs {
-	if(! whiptail --title "$whiptitle" --backtitle "$backtitle" --yesno "Is this information correct?\n\nWEBROOT..........: $WEB_ROOT \nHOSTNAME.........: $HOST_NAME \nWHITELIST........: $WHITELIST_IP \nREWRITES.........: $REWRITES_ENABLED \nPASSWORD.........: $RANDPASS \nSETUP CERT:......: $CERTBOT" 14 60 )
+	if(! whiptail --title "$whiptitle" --backtitle "$backtitle" --yesno "Is this information correct?\n\nWEBROOT..........: $WEB_ROOT \nHOSTNAME.........: $HOST_NAME \nCF ENGINE........: $CF_ENGINE \nWHITELIST........: $WHITELIST_IP \nREWRITES.........: $REWRITES_ENABLED \nPASSWORD.........: $RANDPASS \nSETUP CERT:......: $CERTBOT" 14 60 )
 	then
 		getUserInputs
 	fi
@@ -99,9 +111,9 @@ function confirmInputs {
 
 function confirmCancel {
 	if ( whiptail --title "$whiptitle" --backtitle "$backtitle" --yesno "Are you sure you want to cancel?" 10 40 )
-        then
-                abort
-        fi
+	then
+		abort
+	fi
 }
 
 
@@ -111,9 +123,10 @@ function getSetupComplete {
 
 
 function getUserInputs {
-        getWebRoot
-        getHostName
-        getWhiteList
+	getWebRoot
+	getHostName
+	getCFEngine
+	getWhiteList
 	getRewritesEnabled
 	getAdminPassword
 	getCertBotSetup

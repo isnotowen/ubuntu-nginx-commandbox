@@ -33,4 +33,7 @@ chown -R root:www-data $WEB_ROOT
 chmod -R 750 $WEB_ROOT
 
 echo "Starting up CommandBox instances"
-box server start name=default port=8080 host=127.0.1.1 cfengine=lucee serverConfigFile=$WEB_ROOT/server.json directory=$WEB_ROOT rewritesEnable=$REWRITES_ENABLED openbrowser=false saveSettings=true --force;
+box server start name=default port=8080 host=127.0.1.1 cfengine=$CF_ENGINE serverConfigFile=$WEB_ROOT/server.json directory=$WEB_ROOT rewritesEnable=$REWRITES_ENABLED openbrowser=false saveSettings=true --force;
+
+echo "Setting Admin Password"
+box cfconfig set adminPassword=$ADMIN_PASSWORD to=default
