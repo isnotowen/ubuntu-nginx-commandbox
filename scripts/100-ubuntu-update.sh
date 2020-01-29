@@ -1,12 +1,10 @@
 #!/bin/bash
 
-echo "Updating Ubuntu Software"
-apt-get update
-apt-get upgrade -y
-apt-get dist-upgrade -y
+#Updat Ubuntu Software
+apt update -y && apt upgrade -y && apt dist-upgrade -y
 
-apt-get install unzip curl apt-transport-https gnupg
+debconf-apt-progress -- apt install unzip curl apt-transport-https gnupg -y
 
-echo "Setting up unattended upgrades..."
-apt-get install unattended-upgrades
+#Set up unattended upgrades
+#debconf-apt-progress -- apt install unattended-upgrades
 dpkg-reconfigure unattended-upgrades
