@@ -18,8 +18,8 @@ echo "Adding our default site"
 ln -s /etc/nginx/sites-available/default.conf /etc/nginx/sites-enabled/default.conf
 
 if [ "$REWRITES_ENABLED" = "true" ]; then
-        echo "include path_info.conf;" >> /etc/nginx/commandbox-proxy.conf
-	sed -i "s%#REWRITES_ENABLED%location / {\n \t\ttry_files \$url \$url/ /index.cfm;\n\t}%g" etc/nginx/sites-available/default.conf
+        sed -i "s/#REWRITES_ENABLED# //g" /etc/nginx/commandbox-proxy.conf
+        sed -i "s/#REWRITES_ENABLED# //g" /etc/nginx/sites-available/default.conf
 fi
 
 
