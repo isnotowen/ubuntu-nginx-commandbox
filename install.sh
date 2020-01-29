@@ -42,29 +42,29 @@ getUserInputs
 
 
 
-
-function separator {
-	echo " "
-	echo "------------------------------------------------"
-	echo " "
-}
-
-
+separator
+echo "Updating/Upgrading system"
+separator
 #update ubuntu software
 ./scripts/100-ubuntu-update.sh
 separator
 
+echo "Downloading commandbox"
 #download commandbox
 ./scripts/200-commandbox.sh
 separator
 
+echo "Installing nginx"
 #install nginx
 ./scripts/300-nginx.sh
 separator
 
+echo "Setting up commandbox"
 #configure commandbox
 ./scripts/400-config.sh
 separator
+
+
 
 getSetupComplete
 

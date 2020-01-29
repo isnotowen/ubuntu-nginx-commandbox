@@ -1,6 +1,6 @@
 
 #install commandbox
-debconf-apt-progress -- aptt install default-jre -y
+debconf-apt-progress -- apt install default-jre -y
 debconf-apt-progress -- apt install openjdk-11-jre-headless -y
 debconf-apt-progress -- apt install openjdk-8-jre-headless -y
 debconf-apt-progress -- apt install openjdk-9-jre-headless -y

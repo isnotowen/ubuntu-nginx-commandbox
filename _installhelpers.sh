@@ -5,6 +5,12 @@ function abort {
         exit 1
 }
 
+function separator {
+        echo " "
+        echo "------------------------------------------------"
+        echo " "
+}
+
 
 function getWebRoot {
         WEB_ROOT=$(whiptail --title "$whiptitle" --backtitle "$backtitle" --inputbox "What is the full path to your web root (ex. /web)" 10 80 "/web" 3>&1 1>&2 2>&3)
