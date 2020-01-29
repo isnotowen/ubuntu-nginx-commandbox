@@ -25,11 +25,8 @@ box install commandbox-dotenv
 echo "Creating web root and default sites here: " $WEB_ROOT
 [ -d $WEB_ROOT ] && echo "Using $WEB_ROOT as the webroot"
 [ ! -d $WEB_ROOT ] && mkdir -p $WEB_ROOT && echo "Creating web root here: " $WEB_ROOT
+[ ! -f $WEB_ROOT/index.cfm ] && echo "Creating a default index.cfm" && echo "<!doctype html><html><body><cfoutput><h1>Hello</h1>Current Date/Time: <em>#dateTimeFormat( now() )#</em></cfoutput></body></html>" > $WEB_ROOT/index.cfm
 
-[ ! -f $WEB_ROOT/index.cfm ] {
-	echo "Creating a default index.cfm"
-	echo "<!doctype html><html><body><cfoutput><h1>Hello</h1>Current Date/Time: <em>#dateTimeFormat( now() )#</em></cfoutput></body></html>" > $WEB_ROOT/default/www/index.cfm
-}
 
 #set the web directory permissions
 chown -R root:www-data $WEB_ROOT
