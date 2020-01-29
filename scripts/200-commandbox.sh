@@ -1,10 +1,10 @@
 
 #install commandbox
-debconf-apt-progress -- apt-get install default-jre -y
-debconf-apt-progress -- apt-get install openjdk-11-jre-headless -y
-debconf-apt-progress -- apt-get install openjdk-8-jre-headless -y
-debconf-apt-progress -- apt-get install openjdk-9-jre-headless -y
-debconf-apt-progress -- apt-get install default-jre -y
+debconf-apt-progress -- aptt install default-jre -y
+debconf-apt-progress -- apt install openjdk-11-jre-headless -y
+debconf-apt-progress -- apt install openjdk-8-jre-headless -y
+debconf-apt-progress -- apt install openjdk-9-jre-headless -y
+debconf-apt-progress -- apt install default-jre -y
 
 #java -version
 
@@ -13,7 +13,8 @@ echo "Installing CommandBox"
 curl -fsSl https://downloads.ortussolutions.com/debs/gpg | apt-key add -
 echo "deb https://downloads.ortussolutions.com/debs/noarch /" | tee -a /etc/apt/sources.list.d/commandbox.list
 
-debconf-apt-progress --apt-get update && apt-get install commandbox -y
+debconf-apt-progress -- apt update
+debconf-apt-progress -- apt install commandbox -y
 
 echo "Installing CommandBox CFCONFIG"
 box install commandbox-cfconfig

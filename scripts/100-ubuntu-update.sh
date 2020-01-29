@@ -1,12 +1,12 @@
 #!/bin/bash
 
 #Updat Ubuntu Software
-debconf-apt-progress -- apt-get update -y
-debconf-apt-progress -- apt-get upgrade -y
-debconf-apt-progress -- apt-get dist-upgrade -y
+debconf-apt-progress -- apt update -y
+debconf-apt-progress -- apt upgrade -y
+apt dist-upgrade -y
 
-debconf-apt-progress -- apt-get install unzip curl apt-transport-https gnupg
+debconf-apt-progress -- apt install unzip curl apt-transport-https gnupg
 
 #Set up unattended upgrades
-debconf-apt-progress -- apt-get install unattended-upgrades
+#debconf-apt-progress -- apt install unattended-upgrades
 dpkg-reconfigure unattended-upgrades

@@ -3,7 +3,7 @@
 #!/bin/bash
 
 echo "Installing nginx"
-debconf-apt-progress -- apt-get install nginx-extras -y
+debconf-apt-progress -- apt install nginx-extras -y
 echo "Adding CommandBox nginx configuration files"
 cp etc/nginx/conf.d/nginx-custom-global.conf /etc/nginx/conf.d/nginx-custom-global.conf
 cp etc/nginx/commandbox.conf /etc/nginx/commandbox.conf
