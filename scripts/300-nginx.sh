@@ -17,6 +17,12 @@ rm /etc/nginx/sites-available/default
 echo "Adding our default site"
 ln -s /etc/nginx/sites-available/default.conf /etc/nginx/sites-enabled/default.conf
 
+if [ "$REWRITES_ENABLED" = "true" ]; then
+        sed -i "s/#REWRITES_ENABLED# //g" /etc/nginx/commandbox-proxy.conf
+        sed -i "s/#REWRITES_ENABLED# //g" /etc/nginx/sites-available/default.conf
+fi
+
+
 #------------------------------
 # Inject user defined $WEB_ROOT
 #------------------------------

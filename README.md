@@ -1,13 +1,12 @@
 # Install script for bringing up and securing an nginx + commandbox server
 
-After bringing a new server online download this repo as a zip to `/root`.
+After bringing a new server online, run the following commands (with sudo or as root) to kick things off
 
-You may need to install unzip on the new server: `apt install unzip`
+```bash
+cd /root
+git clone https://github.com/letskillowen/ubuntu-nginx-commandbox.git
+cd ./ubuntu-nginx-commandbox
+chmod +x ./install.sh
+./install.sh
+```
 
-To unzip, run: `unzip [filname uploaded].zip`
-
-Change to the directory: `cd ubuntu-nginx-commandbox`
-
-Allow install script to be executed with: `chmod +x install.sh`
-
-Then just run the install: `./install.sh`
