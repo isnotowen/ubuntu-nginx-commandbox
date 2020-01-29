@@ -38,10 +38,6 @@ fi
 getUserInputs
 
 
-
-
-
-
 separator
 echo "Updating/Upgrading system"
 separator
