@@ -9,6 +9,10 @@ cp etc/nginx/conf.d/nginx-custom-global.conf /etc/nginx/conf.d/nginx-custom-glob
 cp etc/nginx/commandbox.conf /etc/nginx/commandbox.conf
 cp etc/nginx/commandbox-proxy.conf /etc/nginx/commandbox-proxy.conf
 
+if [ "$REWRITES_ENABLED" = "true" ]; then
+	echo "include path_info.conf;" >> /etc/nginx/commandbox-proxy.conf
+fi
+
 echo "Adding Default and Example Site to nginx"
 cp etc/nginx/sites-available/*.conf /etc/nginx/sites-available/
 echo "Removing nginx default site"
