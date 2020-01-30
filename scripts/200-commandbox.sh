@@ -32,5 +32,11 @@ echo "Creating web root and default sites here: " $WEB_ROOT
 chown -R root:www-data $WEB_ROOT
 chmod -R 750 $WEB_ROOT
 
-echo "Starting up CommandBox instances"
-box server start name=default port=8080 host=127.0.1.1 cfengine=lucee serverConfigFile=$WEB_ROOT/server.json directory=$WEB_ROOT rewritesEnable=$REWRITES_ENABLED openbrowser=false saveSettings=true --force;
+echo "Setting $CF_ENGINE Admin Password"
+cfconfig_adminPassword=$ADMIN_PASSWORD
+export cfconfig_adminPassword
+
+echo "Starting up CommandBox instance"
+box server start name=default port=8080 host=127.0.1.1 cfengine=$CF_ENGINE serverConfigFile=$WEB_ROOT/server.json directory=$WEB_ROOT rewritesEnable=$REWRITES_ENABLED openbrowser=false saveSettings=true --force;
+
+unset cfconfig_adminPassword

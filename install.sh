@@ -5,6 +5,9 @@ scriptversion="1.0"
 backtitle="Version $scriptversion"
 whiptitle="Setup nginx & commandbox"
 
+export backtitle
+export whiptitle
+
 . ./_installhelpers.sh --source-only
 
 
