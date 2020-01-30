@@ -37,7 +37,7 @@ function getHostName {
 }
 
 function getWhiteList {
-	WHITELIST_IP=$(whiptail --title "$whiptitle" --backtitle "$backtitle" --inputbox "Enter an IP address you'd like to whitelist for Lucee admin (optional)" 10 80 "127.0.0.1" 3>&1 1>&2 2>&3)
+	WHITELIST_IP=$(whiptail --title "$whiptitle" --backtitle "$backtitle" --inputbox "Enter an IP address you'd like to whitelist for Admin (optional)" 10 80 "" 3>&1 1>&2 2>&3)
 	if [ ! $? = 0 ]; then
 		confirmCancel
 		getWhiteLlist
@@ -47,7 +47,7 @@ function getWhiteList {
 }
 
 function getAdminPassword {
-	ADMIN_PASSWORD=$(whiptail --title "$whiptitle" --backtitle "$backtitle" --passwordbox "Lucee Admin Password (Leave blank for a randomly generated password)" 10 80 3>&1 1>&2 2>&3)
+	ADMIN_PASSWORD=$(whiptail --title "$whiptitle" --backtitle "$backtitle" --passwordbox "Admin Password (Leave blank for a randomly generated password)" 10 80 3>&1 1>&2 2>&3)
 	if [ ! $? = 0 ]; then
 		confirmCancel
 		getAdminPassword
@@ -63,14 +63,17 @@ function getAdminPassword {
 	export ADMIN_PASSWORD
 }
 
+CF_ENGINE="lucee"
 function getCFEngine {
-	engine=(Lucee "" Adobe "")
+	# RE for determining validity of cfengine
+	engineCheck="^(lucee|adobe)@?([0-9]|\.|\-)*$"
+	shopt -s nocasematch;
 
-	CF_ENGINE=$(whiptail --title "$whiptitle" --backtitle "$backtitle" --menu "Which CF engine should be used?" 10 40 2 "${engine[@]}" 3>&1 1>&2 2>&3)
+	CF_ENGINE=$(whiptail --title "$whiptitle" --backtitle "$backtitle" --inputbox "Which CF engine should be used?" 10 80 "$CF_ENGINE" 3>&1 1>&2 2>&3)
 	if [ ! $? = 0 ]; then
 		confirmCancel
 		getCFEngine
-	elif [ "$CF_ENGINE" = "" ]; then
+	elif ! [[ "$CF_ENGINE" =~ $engineCheck ]]; then
 		getCFEngine
 	fi
 

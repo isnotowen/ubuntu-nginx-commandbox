@@ -32,27 +32,11 @@ echo "Creating web root and default sites here: " $WEB_ROOT
 chown -R root:www-data $WEB_ROOT
 chmod -R 750 $WEB_ROOT
 
-echo "Setting up CommandBox instance"
+echo "Setting $CF_ENGINE Admin Password"
+cfconfig_adminPassword=$ADMIN_PASSWORD
+export cfconfig_adminPassword
+
+echo "Starting up CommandBox instance"
 box server start name=default port=8080 host=127.0.1.1 cfengine=$CF_ENGINE serverConfigFile=$WEB_ROOT/server.json directory=$WEB_ROOT rewritesEnable=$REWRITES_ENABLED openbrowser=false saveSettings=true --force;
 
-echo "Setting Admin Password"
-box cfconfig set adminPassword=$ADMIN_PASSWORD to=default
-
-echo "Restarting Commandbox instance"
-box server restart default
-
-
-if [ "$CF_ENGINE" = "Lucee" ]; then
-	#Double check passwords
-	if ( curl --silent http://127.0.0.1/lucee/admin/server.cfm | grep -i new_password_re > /dev/null );
-	then
-		whiptail --title "$whiptitle" --backtitle "$backtitle" --msgbox "The server context password was not set correctly. Please be sure to set it manually." 10 40
-	fi
-
-        if ( curl --silent http://127.0.0.1/lucee/admin/web.cfm | grep -i new_password_re > /dev/null );
-	then
-                whiptail --title "$whiptitle" --backtitle "$backtitle" --msgbox "The web context password was not set correctly. Please be sure to set it manually." 10 40
-        fi
-fi
-
-
+unset cfconfig_adminPassword
