@@ -10,3 +10,5 @@ chmod +x ./install.sh
 ./install.sh
 ```
 
+---
+Thanks for the inspiration [foundeo/ubuntu-nginx-lucee](https://github.com/foundeo/ubuntu-nginx-lucee) and the early interest and contributions by [Kevin](https://github.com/websolete) and [Little Bobby Two Hands](https://github.com/bhartsfield).
