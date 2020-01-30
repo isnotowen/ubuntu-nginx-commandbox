@@ -64,7 +64,9 @@ function getAdminPassword {
 }
 
 function getCFEngine {
-	CF_ENGINE=$(whiptail --title "$whiptitle" --backtitle "$backtitle" --inputbox "What CF Engine should be used? (ex. Lucee or Adobe)" 10 80 "Lucee" 3>&1 1>&2 2>&3)
+	engine=(Lucee "" Adobe "")
+
+	CF_ENGINE=$(whiptail --title "$whiptitle" --backtitle "$backtitle" --menu "Which CF engine should be used?" 10 40 2 "${engine[@]}" 3>&1 1>&2 2>&3)
 	if [ ! $? = 0 ]; then
 		confirmCancel
 		getCFEngine
