@@ -12,6 +12,16 @@ function separator {
 }
 
 
+function setTimeZone {
+	mapfile -t TIME_ZONES < <( timedatectl list-timezones )
+	TIME_ZONE=$(whiptail --title "$whiptitle" --backtitle "$backtitle" --menu "Select a timezone for your server or Cancel to skip." 30 80 20 "${TIME_ZONES[@]}" 3>&1 1>&2 2>&3)
+	if [ ! "$TIME_ZONE" = "" ]; then
+		separator
+		echo "Setting timezone to $TIME_ZONE"
+		echo "$TIME_ZONE" | sudo tee /etc/timezone
+	fi
+}
+
 function getWebRoot {
 	WEB_ROOT=$(whiptail --title "$whiptitle" --backtitle "$backtitle" --inputbox "What is the full path to your web root (ex. /web)" 10 80 "/web" 3>&1 1>&2 2>&3)
 	if [ ! $? = 0 ]; then
@@ -128,6 +138,7 @@ function getSetupComplete {
 
 
 function getUserInputs {
+	setTimeZone
 	getWebRoot
 	getHostName
 	getCFEngine
