@@ -37,6 +37,6 @@ cfconfig_adminPassword=$ADMIN_PASSWORD
 export cfconfig_adminPassword
 
 echo "Starting up CommandBox instance"
-box server start name=default port=8080 host=127.0.1.1 cfengine=$CF_ENGINE serverConfigFile=$WEB_ROOT/server.json directory=$WEB_ROOT rewritesEnable=$REWRITES_ENABLED openbrowser=false saveSettings=true --force;
+box server start name=default port=8080 host=127.0.1.1 cfengine=$CF_ENGINE serverConfigFile=$WEB_ROOT/server.json webroot=$WEB_ROOT rewritesEnable=$REWRITES_ENABLED openbrowser=false saveSettings=true --force;
 
 unset cfconfig_adminPassword
